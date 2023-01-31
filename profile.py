@@ -24,12 +24,13 @@ node2 = request.RawPC("node2")
 node1.hardware_type = 'xl170'
 node2.hardware_type = 'xl170'
 
-iface1 = node1.addInterface('interface-1')
-iface2 = node2.addInterface('interface-2')
+#iface1 = node1.addInterface('interface-1')
+#iface2 = node2.addInterface('interface-2')
 
-link = request.L1Link('link-L1')
-link.addInterface(iface1)
-link.addInterface(iface2)
+link = request.Link(ltype = "L1", members = [node1, node2])
+#(self, name = None, ltype = "", members = None):
+#link.addInterface(iface1)
+#link.addInterface(iface2)
 
 # Install and execute a script that is contained in the repository.
 node1.addService(pg.Execute(shell="sh", command="sudo apt-get update -y && sudo apt-get install libxml2-dev pkg-config -y && sudo git -C /root/ clone https://github.com/itsiprikshit/probed.git && sudo autoreconf -i /root/probed/ "))
